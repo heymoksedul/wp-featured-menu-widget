@@ -1,0 +1,237 @@
+/* MAIN SECTION */
+.afmw-section {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #f5f5f7;
+  border-radius: 24px;
+  padding: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.afmw-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 32px;
+  height: 32px;
+  border: none !important;
+  border-radius: 50% !important;
+  background: #e8e8ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  color: #1d1d1f;
+  opacity: 0;
+  pointer-events: none;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  transition: all 0.3s ease;
+}
+.afmw-section.has-active-item .afmw-close-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+.afmw-close-btn:hover {
+  background: #d2d2d7;
+}
+
+/* CONTENT GRID */
+.afmw-content {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 60px;
+  align-items: stretch;
+  width: 100%;
+  flex: 1;
+}
+
+/* LEFT PANEL & NAV */
+.afmw-left-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.afmw-side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.afmw-nav-btn {
+  background: #e8e8ed;
+  border: none !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #1d1d1f;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  transition: background 0.3s ease;
+}
+.afmw-nav-btn:hover {
+  background: #d2d2d7;
+}
+
+/* ACCORDION LIST */
+.afmw-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding-left: 30px;
+}
+
+.afmw-accordion-item {
+  background: #e8e8ed;
+  border-radius: 30px;
+  overflow: hidden;
+  transition: background-color 0.4s ease, border-radius 0.4s ease;
+  width: fit-content;
+}
+
+.afmw-accordion-item.active {
+  border-radius: 20px;
+  width: 100%;
+}
+
+.afmw-accordion-trigger {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  text-align: left;
+  color: #1d1d1f;
+  font-family: inherit;
+}
+
+.afmw-plus-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid #1d1d1f;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+
+
+
+.afmw-accordion-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.afmw-accordion-item.active .afmw-accordion-title {
+  white-space: normal;
+}
+
+
+
+.afmw-accordion-content {
+  display: none;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.afmw-accordion-item.active .afmw-accordion-content {
+  display: block;
+}
+
+.afmw-accordion-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1d1d1f;
+}
+
+/* RIGHT PANEL & MEDIA */
+.afmw-right-panel {
+  width: 100%;
+  height: 100%;
+}
+
+.afmw-media-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.afmw-media-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.afmw-media-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.afmw-media-item.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .afmw-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .afmw-media-container {
+    height: 350px;
+    min-height: 350px;
+  }
+  .afmw-right-panel {
+    grid-row: 1; /* Move media above accordion on mobile */
+  }
+  .afmw-accordion-list {
+    padding-left: 0;
+  }
+  .afmw-side-nav {
+    display: none;
+  }
+}

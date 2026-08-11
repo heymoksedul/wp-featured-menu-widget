@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access.
 }
 
-define( 'FMW_VERSION', '1.0.0' );
+define( 'FMW_VERSION', '1.1.6' );
 define( 'FMW_PATH', plugin_dir_path( __FILE__ ) );
 define( 'FMW_URL', plugin_dir_url( __FILE__ ) );
 
@@ -62,16 +62,20 @@ final class Feature_Menu_Widget_Plugin {
 
 	public function register_styles() {
 		wp_register_style( 'fmw-style', FMW_URL . 'assets/css/feature-menu.css', [], FMW_VERSION );
+		wp_register_style( 'afmw-style', FMW_URL . 'assets/css/accordion-feature-menu.css', [], FMW_VERSION );
 	}
 
 	public function register_scripts() {
 		wp_register_script( 'fmw-gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', [], '3.12.5', true );
 		wp_register_script( 'fmw-script', FMW_URL . 'assets/js/feature-menu.js', [ 'jquery', 'fmw-gsap' ], FMW_VERSION, true );
+		wp_register_script( 'afmw-script', FMW_URL . 'assets/js/accordion-feature-menu.js', [ 'jquery', 'fmw-gsap' ], FMW_VERSION, true );
 	}
 
 	public function register_widgets( $widgets_manager ) {
 		require_once FMW_PATH . 'widgets/class-feature-menu-widget.php';
+		require_once FMW_PATH . 'widgets/class-accordion-feature-menu-widget.php';
 		$widgets_manager->register( new \Feature_Menu_Widget() );
+		$widgets_manager->register( new \Accordion_Feature_Menu_Widget() );
 	}
 }
 
