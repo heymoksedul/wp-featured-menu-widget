@@ -193,6 +193,11 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  transition: opacity 0.5s ease;
+}
+
+.afmw-section.has-active-item .afmw-media-default {
+  opacity: 0;
 }
 
 .afmw-media-item {
@@ -218,20 +223,107 @@
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .afmw-content {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column-reverse;
     gap: 40px;
+    width: 100%;
   }
   .afmw-media-container {
     height: 350px;
     min-height: 350px;
+    width: 100%;
   }
   .afmw-right-panel {
-    grid-row: 1; /* Move media above accordion on mobile */
+    width: 100%;
+  }
+  .afmw-left-panel {
+    width: 100%;
   }
   .afmw-accordion-list {
     padding-left: 0;
   }
   .afmw-side-nav {
     display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .afmw-left-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  /* Closed State: Row of pills */
+  .afmw-section:not(.has-active-item) .afmw-accordion-list {
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 15px; /* for scrollbar */
+    -webkit-overflow-scrolling: touch;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Hide scrollbar for a cleaner look */
+  .afmw-section:not(.has-active-item) .afmw-accordion-list::-webkit-scrollbar {
+    display: none;
+  }
+  .afmw-section:not(.has-active-item) .afmw-accordion-list {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .afmw-section:not(.has-active-item) .afmw-accordion-item {
+    flex-shrink: 0;
+    width: auto !important;
+    display: block !important;
+  }
+
+  /* Open State: Hide inactive pills */
+  .afmw-section.has-active-item .afmw-accordion-item:not(.active) {
+    display: none !important;
+  }
+  
+  .afmw-section.has-active-item .afmw-accordion-item.active {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .afmw-section.has-active-item .afmw-accordion-list {
+    width: calc(100% - 80px);
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* Arrows: Vertically centered on the active description card */
+  .afmw-section.has-active-item .afmw-side-nav {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 10;
+    pointer-events: none; /* Let clicks pass through empty space */
+  }
+
+  .afmw-section.has-active-item .afmw-nav-btn {
+    pointer-events: auto; /* Re-enable clicks on arrows */
+    width: 32px !important;
+    height: 32px !important;
+    background: #e8e8ed;
+    border-radius: 50% !important;
+  }
+
+  /* Rotate arrows to point Left/Right */
+  .afmw-nav-prev svg {
+    transform: rotate(-90deg);
+  }
+  .afmw-nav-next svg {
+    transform: rotate(-90deg);
   }
 }

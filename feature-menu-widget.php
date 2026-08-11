@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access.
 }
 
-define( 'FMW_VERSION', '1.1.6' );
+define( 'FMW_VERSION', '1.2.1' );
 define( 'FMW_PATH', plugin_dir_path( __FILE__ ) );
 define( 'FMW_URL', plugin_dir_url( __FILE__ ) );
 
