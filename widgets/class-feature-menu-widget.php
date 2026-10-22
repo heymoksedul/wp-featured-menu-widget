@@ -133,6 +133,94 @@ class Feature_Menu_Widget extends Widget_Base {
 		] );
 
 		$this->end_controls_section();
+
+		/* ===== SUBMENU STYLE ===== */
+		$this->start_controls_section( 'section_submenu_style', [
+			'label' => __( 'Submenu', 'feature-menu-widget' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_responsive_control( 'submenu_max_height', [
+			'label'       => __( 'Max Height (Scroll Y)', 'feature-menu-widget' ),
+			'type'        => Controls_Manager::SLIDER,
+			'size_units'  => [ 'px', 'vh' ],
+			'range'       => [
+				'px' => [ 'min' => 150, 'max' => 900, 'step' => 10 ],
+				'vh' => [ 'min' => 20, 'max' => 95, 'step' => 1 ],
+			],
+			'default'     => [
+				'unit' => 'px',
+				'size' => 440,
+			],
+			'selectors'   => [
+				'{{WRAPPER}} .submenu-panel' => 'max-height: {{SIZE}}{{UNIT}} !important;',
+			],
+			'description' => __( 'When submenu items exceed this height, a vertical scrollbar appears.', 'feature-menu-widget' ),
+		] );
+
+		$this->add_responsive_control( 'submenu_width', [
+			'label'      => __( 'Width', 'feature-menu-widget' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px', '%' ],
+			'range'      => [
+				'px' => [ 'min' => 220, 'max' => 600, 'step' => 5 ],
+			],
+			'default'    => [
+				'unit' => 'px',
+				'size' => 320,
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .submenu-panel' => 'width: {{SIZE}}{{UNIT}} !important;',
+			],
+		] );
+
+		$this->add_responsive_control( 'submenu_items_gap', [
+			'label'      => __( 'Items Gap', 'feature-menu-widget' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [
+				'px' => [ 'min' => 4, 'max' => 30, 'step' => 1 ],
+			],
+			'default'    => [
+				'unit' => 'px',
+				'size' => 12,
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .submenu-list' => 'gap: {{SIZE}}{{UNIT}} !important;',
+			],
+		] );
+
+		$this->add_responsive_control( 'submenu_padding', [
+			'label'      => __( 'Padding', 'feature-menu-widget' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%', 'em' ],
+			'default'    => [
+				'top'      => 20,
+				'right'    => 22,
+				'bottom'   => 20,
+				'left'     => 22,
+				'unit'     => 'px',
+				'isLinked' => false,
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .submenu-panel' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+			],
+		] );
+
+		$this->add_control( 'hide_scrollbar', [
+			'label'        => __( 'Hide Scrollbar', 'feature-menu-widget' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'feature-menu-widget' ),
+			'label_off'    => __( 'No', 'feature-menu-widget' ),
+			'return_value' => 'yes',
+			'default'      => 'yes',
+			'selectors'    => [
+				'{{WRAPPER}} .submenu-list' => 'scrollbar-width: none !important; -ms-overflow-style: none !important;',
+				'{{WRAPPER}} .submenu-list::-webkit-scrollbar' => 'display: none !important; width: 0 !important; height: 0 !important;',
+			],
+		] );
+
+		$this->end_controls_section();
 	}
 
 	private function get_default_menu_items() {

@@ -139,11 +139,17 @@
           const listRect = featureListEl.getBoundingClientRect();
           const itemRect = item.getBoundingClientRect();
           submenu.style.top = listRect.top - itemRect.top + "px";
-          submenu.style.height = listRect.height + "px";
+          const targetH = Math.max(listRect.height, 320);
+          submenu.style.height = targetH + "px";
+
+          const listEl = submenu.querySelector(".submenu-list");
+          if (listEl) {
+            listEl.scrollTop = 0;
+          }
 
           gsap.fromTo(
             submenu,
-            { display: "block", opacity: 0, x: -10, y: 0 },
+            { display: "flex", opacity: 0, x: -10, y: 0 },
             {
               opacity: 1,
               x: 0,
